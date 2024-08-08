@@ -43,6 +43,21 @@
                             <textarea id="address" name="address" class="textarea textarea-bordered" required>{{ $customer->address }}</textarea>
                         </div>
 
+                        <!-- Continent -->
+                        <div class="form-control mb-5">
+                            <label for="continent" class="label">
+                                <span class="label-text font-medium">Continent</span>
+                            </label>
+                            <select id="continent" name="continent" class="select select-bordered" required>
+                                <option value="Asia" {{ $customer->continent == 'Asia' ? 'selected' : '' }}>Asia</option>
+                                <option value="Africa" {{ $customer->continent == 'Africa' ? 'selected' : '' }}>Africa</option>
+                                <option value="North America" {{ $customer->continent == 'North America' ? 'selected' : '' }}>North America</option>
+                                <option value="South America" {{ $customer->continent == 'South America' ? 'selected' : '' }}>South America</option>
+                                <option value="Antarctica" {{ $customer->continent == 'Antarctica' ? 'selected' : '' }}>Antarctica</option>
+                                <option value="Europe" {{ $customer->continent == 'Europe' ? 'selected' : '' }}>Europe</option>
+                            </select>
+                        </div>
+
                         <div class="flex justify-end">
                             <button type="submit" class="btn btn-primary">Update Customer</button>
                         </div>

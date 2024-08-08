@@ -8,24 +8,27 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Customer::query();
+    {
+        $query = Customer::query();
 
-    // Ambil nilai pencarian dari input
-    $search = $request->input('search');
+        // Search filter
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
 
-    if ($search) {
-        // Cari berdasarkan nama atau email
-        $query->where(function($q) use ($search) {
-            $q->where('name', 'like', "%{$search}%")
-              ->orWhere('email', 'like', "%{$search}%");
-        });
+        // Continent filter
+        if ($continent = $request->input('continent')) {
+            $query->where('continent', $continent);
+        }
+
+        // Fetch customers with pagination
+        $customers = $query->paginate(10);
+
+        return view('customers.index', compact('customers'));
     }
-
-    $customers = $query->get();
-
-    return view('customers.index', compact('customers'));
-}
 
 
     public function create()
@@ -40,6 +43,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:customers',
             'phone' => 'required',
             'address' => 'required',
+            'continent' => 'required'
         ]);
 
         Customer::create($request->all());
@@ -64,6 +68,7 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:customers,email,'.$customer->id,
             'phone' => 'required',
             'address' => 'required',
+            'continent' => 'required'
         ]);
 
         $customer->update($request->all());
@@ -77,5 +82,4 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index');
     }
-
 }

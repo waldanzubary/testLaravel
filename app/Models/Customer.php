@@ -19,7 +19,8 @@ class Customer extends Model
         'email',
         'phone',
         'address',
-        'country',
+        'category_id',
+        'continent',
     ];
 
     /**
@@ -29,4 +30,6 @@ class Customer extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+
 }
