@@ -28,7 +28,7 @@
                                 <td class="p-4">{{ $contact->email }}</td>
                                 <td class="p-4">{{ $contact->phone }}</td>
                                 <td class="p-4 flex space-x-2">
-                                    <a href="{{ route('contacts.edit', [$customer->id, $contact->id]) }}" class="btn btn-secondary">Edit</a>
+                                    <a href="{{ route('contacts.edit', [$customer->id, $contact->id]) }}" class="btn btn-primary">Edit</a>
                                     <form action="{{ route('contacts.destroy', [$customer->id, $contact->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

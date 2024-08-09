@@ -30,7 +30,7 @@
                 <span class="label-text">Items</span>
             </label>
             <div id="items-container">
-                <div class="flex items-center mb-4 border border-base-300 p-4 rounded-lg">
+                <div class="flex items-center mb-4  p-4 rounded-lg">
                     <div class="flex-1 mr-2">
                         <select name="items[0][item_id]" class="select select-bordered w-full">
                             @foreach ($items as $item)
@@ -58,7 +58,7 @@
         let itemsContainer = document.getElementById('items-container');
         let index = itemsContainer.children.length;
         let newItem = `
-            <div class="flex items-center mb-4 border border-base-300 p-4 rounded-lg">
+            <div class="flex items-center mb-4  p-4 rounded-lg">
                 <div class="flex-1 mr-2">
                     <select name="items[${index}][item_id]" class="select select-bordered w-full">
                         @foreach ($items as $item)

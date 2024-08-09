@@ -66,14 +66,17 @@ class SaleController extends Controller
     {
         $sale = Sale::with('items.item')->findOrFail($id);
         $customers = Customer::all();
-        $items = Item::all();
+        $items = Item::all(); // Pastikan data item diambil
+
         return view('sales.edit', compact('sale', 'customers', 'items'));
     }
 
 
+
+
+
     public function update(Request $request, $id)
 {
-    // Validate request data
     $validated = $request->validate([
         'customer_id' => 'required|exists:customers,id',
         'sale_date' => 'required|date',
@@ -82,33 +85,40 @@ class SaleController extends Controller
     ]);
 
     $sale = Sale::findOrFail($id);
-    $sale->customer_id = $validated['customer_id'];
-    $sale->sale_date = $validated['sale_date'];
 
-    // Remove existing sale items
+    // Kembalikan stok item sebelum menghapus
+    foreach ($sale->items as $saleItem) {
+        $item = $saleItem->item;
+        $item->stock += $saleItem->quantity;
+        $item->save();
+    }
+
+    // Hapus item lama
     $sale->items()->delete();
 
     $totalPrice = 0;
-    if (isset($validated['items']) && is_array($validated['items'])) {
-        foreach ($validated['items'] as $saleItemData) {
-            $item = Item::findOrFail($saleItemData['item_id']);
-            $saleItem = new SaleItem([
-                'item_id' => $item->id,
-                'quantity' => $saleItemData['quantity'],
-                'price' => $item->price * $saleItemData['quantity'],
-            ]);
-            $sale->items()->save($saleItem);
-            $item->reduceStock($saleItemData['quantity']);
-            $totalPrice += $saleItem->price;
-        }
+    foreach ($validated['items'] as $saleItemData) {
+        $item = Item::findOrFail($saleItemData['item_id']);
+        $saleItem = new SaleItem([
+            'item_id' => $item->id,
+            'quantity' => $saleItemData['quantity'],
+            'price' => $item->price * $saleItemData['quantity'],
+        ]);
+        $sale->items()->save($saleItem);
+
+        // Kurangi stok item baru
+        $item->reduceStock($saleItemData['quantity']);
+        $totalPrice += $saleItem->price;
     }
 
-    // Update total price and save the sale
     $sale->total_price = $totalPrice;
+    $sale->customer_id = $validated['customer_id'];
+    $sale->sale_date = $validated['sale_date'];
     $sale->save();
 
     return redirect()->route('sales.index');
 }
+
 
 
     public function destroy($id)
