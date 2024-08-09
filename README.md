@@ -13,7 +13,7 @@ Ensure you have the following installed on your system:
 
 
 # 1. Clone Repository
-https://github.com/waldanzubary/testLaravel.git
+```https://github.com/waldanzubary/testLaravel.git```
 
 # 2. Install Dependencies
 composer install
