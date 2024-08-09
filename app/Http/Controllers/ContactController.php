@@ -74,11 +74,11 @@ class ContactController extends Controller
 {
     $query = Customer::query();
 
-    // Ambil nilai pencarian dari input
+    
     $search = $request->input('search');
 
     if ($search) {
-        // Cari berdasarkan nama atau email
+
         $query->where(function($q) use ($search) {
             $q->where('name', 'like', "%{$search}%")
               ->orWhere('email', 'like', "%{$search}%");

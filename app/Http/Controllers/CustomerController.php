@@ -11,7 +11,7 @@ class CustomerController extends Controller
     {
         $query = Customer::query();
 
-        // Search filter
+
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
@@ -19,12 +19,12 @@ class CustomerController extends Controller
             });
         }
 
-        // Continent filter
+
         if ($continent = $request->input('continent')) {
             $query->where('continent', $continent);
         }
 
-        // Fetch customers with pagination
+        
         $customers = $query->paginate(10);
 
         return view('customers.index', compact('customers'));

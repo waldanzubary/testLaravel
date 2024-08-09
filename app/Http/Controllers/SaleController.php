@@ -12,14 +12,14 @@ class SaleController extends Controller
 {
     public function index()
     {
-        // Fetch sales with related customers
+        
         $sales = Sale::with('customer')->get();
         return view('sales.index', compact('sales'));
     }
 
     public function create()
     {
-        // Fetch all customers and items for the create form
+
         $customers = Customer::all();
         $items = Item::all();
         return view('sales.create', compact('customers', 'items'));
@@ -55,7 +55,7 @@ class SaleController extends Controller
             $totalPrice += $saleItem->price;
         }
 
-        // Update total price and save the sale
+
         $sale->total_price = $totalPrice;
         $sale->save();
 
@@ -66,7 +66,7 @@ class SaleController extends Controller
     {
         $sale = Sale::with('items.item')->findOrFail($id);
         $customers = Customer::all();
-        $items = Item::all(); // Pastikan data item diambil
+        $items = Item::all();
 
         return view('sales.edit', compact('sale', 'customers', 'items'));
     }
@@ -86,7 +86,7 @@ class SaleController extends Controller
 
     $sale = Sale::findOrFail($id);
 
-    // Kembalikan stok item sebelum menghapus
+
     foreach ($sale->items as $saleItem) {
         $item = $saleItem->item;
         $item->stock += $saleItem->quantity;
@@ -106,7 +106,7 @@ class SaleController extends Controller
         ]);
         $sale->items()->save($saleItem);
 
-        // Kurangi stok item baru
+
         $item->reduceStock($saleItemData['quantity']);
         $totalPrice += $saleItem->price;
     }
@@ -123,7 +123,7 @@ class SaleController extends Controller
 
     public function destroy($id)
     {
-        // Find the sale and delete associated items and sale itself
+
         $sale = Sale::findOrFail($id);
         $sale->items()->delete();
         $sale->delete();

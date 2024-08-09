@@ -12,7 +12,7 @@ class ItemController extends Controller
         $Item = Item::all();
 
         return view('Warehouse.index', ['Item'=> $Item]);
-        // return view ('Warehouse.index');
+        
     }
 
 
@@ -35,7 +35,7 @@ class ItemController extends Controller
 
 
     $item = new Item($validated);
-    $item->setStatus(); // Set status based on stock
+    $item->setStatus();
     $item->save();
 
     return redirect('Warehouse');
@@ -56,7 +56,7 @@ public function update(Request $request, $id)
     $item->price = $request->input('price');
 
 
-    $item->setStatus(); // Update status based on stock
+    $item->setStatus();
     $item->save();
 
     return redirect('Warehouse');
