@@ -16,21 +16,21 @@ Ensure you have the following installed on your system:
 ```https://github.com/waldanzubary/testLaravel.git```
 
 # 2. Install Dependencies
-composer install
+```composer install```
 
 
 # 3. Buat File Environment
-cp .env.example .env
+```cp .env.example .env```
 
 
 # 4. Setup Database
 # Buat database baru di MySQL dan konfigurasikan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` di file `.env`.
 
 # 5. Migrasi 
-php artisan migrate 
+```php artisan migrate ```
 
 # 6. Jalankan Server Lokal
-php artisan serve
+```php artisan serve```
 
 # 7. Akses Aplikasi
 # Buka browser dan akses `http://127.0.0.1:8000/customers`.
