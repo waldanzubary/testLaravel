@@ -7,7 +7,7 @@
         <div class="flex justify-center">
             <div class="w-full max-w-lg">
                 <div class="card bg-base-200 shadow-lg border border-base-300 rounded-lg">
-                    <div class="card-header text-xl font-semibold p-4 border-b border-base-300">Tambah Data Buku</div>
+                    <div class="card-header text-xl font-semibold p-4 border-b border-base-300">Tambah Data</div>
                     <div class="card-body p-6">
                         <form action="{{ route('items.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
