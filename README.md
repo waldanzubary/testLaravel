@@ -1,26 +1,36 @@
+# Test Laravel Project
+
+This is a test Laravel project repository. Follow the steps below to set up and run the project on your local machine.
+
+## Prerequisites
+
+Ensure you have the following installed on your system:
+
+- **PHP >= 8.0**
+- **Composer**
+- **MySQL** (or any other compatible database)
+- **Git**
+
+
 # 1. Clone Repository
-git clone https://github.com/username/repo-name.git
-cd repo-name
+https://github.com/waldanzubary/testLaravel.git
 
 # 2. Install Dependencies
 composer install
-npm install
-npm run dev
+
 
 # 3. Buat File Environment
 cp .env.example .env
 
-# 4. Generate Application Key
-php artisan key:generate
 
-# 5. Setup Database
+# 4. Setup Database
 # Buat database baru di MySQL dan konfigurasikan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` di file `.env`.
 
-# 6. Migrasi & Seed Database
-php artisan migrate --seed
+# 5. Migrasi 
+php artisan migrate 
 
-# 7. Jalankan Server Lokal
+# 6. Jalankan Server Lokal
 php artisan serve
 
-# 8. Akses Aplikasi
-# Buka browser dan akses `http://localhost:8000`.
+# 7. Akses Aplikasi
+# Buka browser dan akses `http://127.0.0.1:8000/customers`.
