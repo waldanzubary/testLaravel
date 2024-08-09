@@ -2,8 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h1>Sales</h1>
-    <a href="{{ route('sales.create') }}" class="btn btn-primary">Add Sale</a>
+    <div class="titleaction flex justify-between">
+        <h1 class="text-2xl font-bold mb-4">Transaction</h1>
+        <a href="{{ route('sales.create') }}" class="btn btn-primary">Add Sale</a>
+    </div>
+
     <table class="table mt-4">
         <thead>
             <tr>

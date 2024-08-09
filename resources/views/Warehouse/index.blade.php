@@ -3,18 +3,24 @@
 @section('content')
 <!-- Begin Page Content -->
 <!-- Page Heading -->
-<div class="flex align-items-center justify-end mb-4">
+{{-- <div class="flex align-items-center justify-end mb-4"> --}}
 
-    <a href="Warehouse/create" class="btn btn-primary ">
-        <i class="fa fa-book fa-sm"></i> Create Item
-    </a>
-</div>
+
+    <div class="titleaction flex justify-between">
+        <h1 class="text-2xl font-bold mb-4">Transaction</h1>
+        <a href="Warehouse/create" class="btn btn-primary ">
+            <i class="fa fa-book fa-sm"></i> Create Item
+        </a>
+    </div>
+
+
+
 
 <!-- Content Row -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-5 gap-6">
     @foreach ($Item as $item)
     <div class="card  bg-base-300  shadow-lg rounded-lg overflow-hidden ">
-        
+
         <div class="card-body p-4">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">{{ $item->itemName }}</h2>
